@@ -1,6 +1,6 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
-import { Document, Types } from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
+import { Field, ObjectType, registerEnumType } from '@nestjs/graphql'
+import { Document, Types } from 'mongoose'
 
 export enum Roles {
   Admin = 'Admin',
@@ -10,43 +10,43 @@ export enum Roles {
 registerEnumType(Roles, {
   name: 'Roles',
   description: 'Admin create projects & tasks, Basic create tasks',
-});
+})
 
 @ObjectType()
 @Schema()
 export class User {
   @Field(() => String)
-  _id: Types.ObjectId;
+  _id: Types.ObjectId
 
   @Field()
   @Prop()
-  firstName: string;
+  firstName: string
 
   @Field()
   @Prop()
-  lastName: string;
+  lastName: string
 
   @Field()
   @Prop()
-  password: string;
+  password: string
 
   @Field()
   @Prop({ unique: true })
-  email: string;
+  email: string
 
   @Field({ nullable: true })
   @Prop()
-  imageURL?: string;
+  imageURL?: string
 
   @Field(() => Roles, { defaultValue: Roles.Admin, nullable: true })
   @Prop()
-  role?: Roles;
+  role?: Roles
 
   @Field()
   @Prop()
-  createdAt: string = new Date().toISOString();
+  createdAt: string = new Date().toISOString()
 }
 
-export type UserDocument = User & Document;
+export type UserDocument = User & Document
 
-export const UserSchema = SchemaFactory.createForClass(User);
+export const UserSchema = SchemaFactory.createForClass(User)

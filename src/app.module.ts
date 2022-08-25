@@ -1,14 +1,14 @@
-import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { GraphQLModule } from '@nestjs/graphql';
-import { JwtModule } from '@nestjs/jwt';
-import { MongooseModule } from '@nestjs/mongoose';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
+import { Module } from '@nestjs/common'
+import { ConfigModule, ConfigService } from '@nestjs/config'
+import { GraphQLModule } from '@nestjs/graphql'
+import { JwtModule } from '@nestjs/jwt'
+import { MongooseModule } from '@nestjs/mongoose'
 
-import * as packageJson from './../package.json';
-import { AppResolver } from './app.resolver';
-import { AppService } from './app.service';
-import { UserModule } from './user/user.module';
+import * as packageJson from './../package.json'
+import { AppResolver } from './app.resolver'
+import { AppService } from './app.service'
+import { UserModule } from './user/user.module'
 
 @Module({
   imports: [

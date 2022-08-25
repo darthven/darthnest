@@ -1,22 +1,22 @@
-import { InputType, Field, OmitType, PartialType } from '@nestjs/graphql';
+import { InputType, Field, OmitType, PartialType } from '@nestjs/graphql'
 
 @InputType()
 export class CreateUserInput {
   @Field()
-  firstName: string;
+  firstName: string
 
   @Field()
-  lastName: string;
+  lastName: string
 
   @Field()
-  password: string;
+  password: string
 
   @Field()
   // @IsEmail()
-  email: string;
+  email: string
 
   @Field()
-  createdAt: string = new Date().toISOString();
+  createdAt: string = new Date().toISOString()
 }
 
 @InputType()

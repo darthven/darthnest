@@ -1,10 +1,10 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { UserResolver } from './user.resolver';
-import { UserService } from './services/user.service';
-import { UserGuard } from './guards/user.guard';
+import { Test, TestingModule } from '@nestjs/testing'
+import { UserResolver } from './user.resolver'
+import { UserService } from './services/user.service'
+import { UserGuard } from './guards/user.guard'
 
 describe('UserResolver', () => {
-  let resolver: UserResolver;
+  let resolver: UserResolver
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -16,12 +16,12 @@ describe('UserResolver', () => {
           useValue: {},
         },
       ],
-    }).compile();
+    }).compile()
 
-    resolver = module.get<UserResolver>(UserResolver);
-  });
+    resolver = module.get<UserResolver>(UserResolver)
+  })
 
   it('should be defined', () => {
-    expect(resolver).toBeDefined();
-  });
-});
+    expect(resolver).toBeDefined()
+  })
+})

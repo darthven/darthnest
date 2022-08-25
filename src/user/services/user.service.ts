@@ -1,12 +1,12 @@
-import { Injectable } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { InjectModel } from '@nestjs/mongoose';
-import * as bcrypt from 'bcrypt';
-import { GraphQLError } from 'graphql';
-import { Model, Types } from 'mongoose';
+import { Injectable } from '@nestjs/common'
+import { JwtService } from '@nestjs/jwt'
+import { InjectModel } from '@nestjs/mongoose'
+import * as bcrypt from 'bcrypt'
+import { GraphQLError } from 'graphql'
+import { Model, Types } from 'mongoose'
 
-import { CreateUserInput, UpdateUserInput } from '../dto/user-inputs.dto';
-import { User, UserDocument } from '../entities/user.entity';
+import { CreateUserInput, UpdateUserInput } from '../dto/user-inputs.dto'
+import { User, UserDocument } from '../entities/user.entity'
 
 @Injectable()
 export class UserService {
@@ -19,52 +19,52 @@ export class UserService {
     try {
       const isUser = await this.UserModel.findOne({
         email: createUserInput.email,
-      });
+      })
       if (isUser) {
-        throw new GraphQLError('Nah Bro, you already exist 🤡');
+        throw new GraphQLError('Nah Bro, you already exist 🤡')
       } else {
         createUserInput.password = await bcrypt
           .hash(createUserInput.password, 10)
-          .then((r) => r);
-        return await new this.UserModel(createUserInput).save();
+          .then((r) => r)
+        return await new this.UserModel(createUserInput).save()
       }
     } catch (err) {
-      console.error(err);
+      console.error(err)
     }
   }
 
   async login({ password, email }) {
     try {
-      const res = await this.UserModel.findOne({ email });
+      const res = await this.UserModel.findOne({ email })
       return res && (await bcrypt.compare(password, res.password))
         ? this.getToken(email, res._id).then((result) => result)
-        : new GraphQLError('Nah Bro, you already exist 🤡');
+        : new GraphQLError('Nah Bro, you already exist 🤡')
     } catch (err) {
-      console.error(err);
+      console.error(err)
     }
   }
 
   async getToken(email, _id): Promise<string> {
     try {
-      return await this.jwtService.signAsync({ email, _id });
+      return await this.jwtService.signAsync({ email, _id })
     } catch (err) {
-      console.error(err);
+      console.error(err)
     }
   }
 
   async findAll() {
     try {
-      return await this.UserModel.find().exec();
+      return await this.UserModel.find().exec()
     } catch (err) {
-      console.error(err);
+      console.error(err)
     }
   }
 
   async findOne(_id: Types.ObjectId) {
     try {
-      return await this.UserModel.findById(_id).exec();
+      return await this.UserModel.findById(_id).exec()
     } catch (err) {
-      console.error(err);
+      console.error(err)
     }
   }
 
@@ -72,29 +72,29 @@ export class UserService {
     try {
       return await this.UserModel.findByIdAndUpdate(_id, updateUserInput, {
         new: true,
-      }).exec();
+      }).exec()
     } catch (err) {
-      console.error(err);
+      console.error(err)
     }
   }
 
   async updatePassword(_id, userPass, newPass) {
     try {
-      const User = await this.UserModel.findById({ _id: _id });
+      const User = await this.UserModel.findById({ _id: _id })
       if (await bcrypt.compare(userPass, User.password)) {
-        User.password = await bcrypt.hash(newPass, 10);
-        return await new this.UserModel(User).save();
+        User.password = await bcrypt.hash(newPass, 10)
+        return await new this.UserModel(User).save()
       }
     } catch (err) {
-      console.error(err);
+      console.error(err)
     }
   }
 
   async remove(_id: string) {
     try {
-      return await this.UserModel.findByIdAndDelete(_id).exec();
+      return await this.UserModel.findByIdAndDelete(_id).exec()
     } catch (err) {
-      console.error(err);
+      console.error(err)
     }
   }
 }

@@ -1,11 +1,11 @@
-import { Module } from '@nestjs/common';
-import { JwtModule, JwtService } from '@nestjs/jwt';
-import { MongooseModule } from '@nestjs/mongoose';
+import { Module } from '@nestjs/common'
+import { JwtModule, JwtService } from '@nestjs/jwt'
+import { MongooseModule } from '@nestjs/mongoose'
 
-import { User, UserSchema } from './entities/user.entity';
-import { UserGuard } from './guards/user.guard';
-import { UserResolver } from './user.resolver';
-import { UserService } from './services/user.service';
+import { User, UserSchema } from './entities/user.entity'
+import { UserGuard } from './guards/user.guard'
+import { UserResolver } from './user.resolver'
+import { UserService } from './services/user.service'
 
 @Module({
   imports: [
